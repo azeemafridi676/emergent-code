@@ -29,7 +29,7 @@ const Skills = ({ id, data }) => {
     {
       key: "tools",
       title: "Tools",
-      icon: <Tool className="w-5 h-5" />,
+      icon: <Wrench className="w-5 h-5" />,
       items: data.tools,
       color: "purple"
     },
