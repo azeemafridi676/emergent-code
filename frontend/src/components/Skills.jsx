@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Code, Database, Cloud, Tool, Zap, Brain } from "lucide-react";
+import { Code, Database, Cloud, Wrench, Zap, Brain } from "lucide-react";
 
 const Skills = ({ id, data }) => {
   const [activeCategory, setActiveCategory] = useState("programmingLanguages");
