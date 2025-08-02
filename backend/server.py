@@ -72,18 +72,18 @@ class ProjectCreate(BaseModel):
     live_url: str = ""
 
 class ProjectUpdate(BaseModel):
-    title: str = None
-    description: str = None
-    long_description: dict = None
-    technologies: List[str] = None
-    features: List[str] = None
-    status: str = None
-    impact: str = None
-    thumbnail_image: str = None
-    videos: List[ProjectMedia] = None
-    images: List[ProjectMedia] = None
-    github_url: str = None
-    live_url: str = None
+    title: Optional[str] = None
+    description: Optional[str] = None
+    long_description: Optional[dict] = None
+    technologies: Optional[List[str]] = None
+    features: Optional[List[str]] = None
+    status: Optional[str] = None
+    impact: Optional[str] = None
+    thumbnail_image: Optional[str] = None
+    videos: Optional[List[ProjectMedia]] = None
+    images: Optional[List[ProjectMedia]] = None
+    github_url: Optional[str] = None
+    live_url: Optional[str] = None
 
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
