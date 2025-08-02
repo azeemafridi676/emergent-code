@@ -189,16 +189,18 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Enhanced Projects Component with Thumbnails"
     - "ProjectDetail Component with Video and Images"
-    - "Enhanced Project Data with Media"
     - "Routing for Project Details"
-  stuck_tasks: []
-  test_all: true
-  test_priority: "high_first"
+  stuck_tasks:
+    - "ProjectDetail Component with Video and Images"
+    - "Routing for Project Details"
+  test_all: false
+  test_priority: "stuck_first"
 
 agent_communication:
   - agent: "main"
     message: "Implemented complete video/photos/descriptions feature for projects. Added backend APIs for project CRUD operations. Enhanced frontend with thumbnail images, VIEW DETAILS button, and comprehensive project detail pages with auto-play videos, image galleries, and detailed descriptions. Used placeholder videos from Google CDN and high-quality tech images. Ready for backend testing to verify APIs work correctly, then frontend testing to verify complete user flow."
   - agent: "testing"
     message: "BACKEND TESTING COMPLETED SUCCESSFULLY - All Project CRUD APIs are working perfectly. Tested comprehensive project creation with full media structure (videos, images, long_description), data retrieval, updates, error handling, and deletion. MongoDB integration functional. All 7/7 tests passed. Backend is ready for production. Frontend testing can now proceed to verify complete user experience flow."
+  - agent: "testing"
+    message: "FRONTEND TESTING COMPLETED - Mixed results found. ✅ WORKING: Enhanced Projects Component (thumbnails, VIEW DETAILS button, project selection), Enhanced Project Data (comprehensive media structure), VIEW DETAILS button opens new tabs correctly. ❌ CRITICAL ISSUE: Direct URL access to project detail pages fails due to server-side routing configuration. The React Router is correctly implemented, but the server needs SPA fallback configuration to serve index.html for all non-API routes. This prevents direct access to /project/:projectId URLs but internal navigation works perfectly."
