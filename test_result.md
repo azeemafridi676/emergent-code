@@ -177,7 +177,6 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Project Models and APIs"
     - "Enhanced Projects Component with Thumbnails"
     - "ProjectDetail Component with Video and Images"
     - "Enhanced Project Data with Media"
