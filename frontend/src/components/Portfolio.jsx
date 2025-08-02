@@ -10,6 +10,7 @@ import AIChat from "./AIChat";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import { mockData } from "../data/mock";
+import { projectsData } from "../data/projectsData";
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -41,7 +42,7 @@ const Portfolio = () => {
         <Hero id="home" />
         <About id="about" data={mockData.about} />
         <Experience id="experience" data={mockData.experience} />
-        <Projects id="projects" data={mockData.projects} />
+        <Projects id="projects" data={projectsData} />
         <Skills id="skills" data={mockData.skills} />
         <Education id="education" data={mockData.education} />
         <Contact id="contact" data={mockData.contact} />
