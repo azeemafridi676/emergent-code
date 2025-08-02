@@ -129,7 +129,7 @@ const Projects = ({ id, data }) => {
                 {/* Technologies */}
                 <div className="mb-8">
                   <h4 className="text-lg font-semibold text-white mb-4 font-mono">
-                    <span className="text-cyan-400">></span> Technologies:
+                    <span className="text-cyan-400">&gt;</span> Technologies:
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {data[selectedProject].technologies.map((tech, index) => (
@@ -146,7 +146,7 @@ const Projects = ({ id, data }) => {
                 {/* Features */}
                 <div className="mb-8">
                   <h4 className="text-lg font-semibold text-white mb-4 font-mono">
-                    <span className="text-cyan-400">></span> Key Features:
+                    <span className="text-cyan-400">&gt;</span> Key Features:
                   </h4>
                   <ul className="grid md:grid-cols-2 gap-3">
                     {data[selectedProject].features.map((feature, index) => (
