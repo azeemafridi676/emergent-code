@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ExternalLink, Github, Code, Zap, Database, Globe } from "lucide-react";
+import { ExternalLink, Github, Code, Zap, Database, Globe, Eye } from "lucide-react";
 
 const Projects = ({ id, data }) => {
   const [selectedProject, setSelectedProject] = useState(0);
@@ -19,6 +19,10 @@ const Projects = ({ id, data }) => {
       case 'Completed': return 'text-purple-400 bg-purple-400/10 border-purple-400/30';
       default: return 'text-gray-400 bg-gray-400/10 border-gray-400/30';
     }
+  };
+
+  const openProjectDetails = (projectId) => {
+    window.open(`/project/${projectId}`, '_blank');
   };
 
   return (
@@ -51,15 +55,18 @@ const Projects = ({ id, data }) => {
                         : "text-gray-400 hover:text-cyan-400 hover:bg-gray-700/50"
                     }`}
                   >
-                    <div className="flex items-center space-x-2">
-                      <div className={`transition-colors duration-300 ${
-                        selectedProject === index ? "text-cyan-400" : "group-hover:text-cyan-400"
-                      }`}>
-                        {getProjectIcon(project.technologies)}
+                    <div className="flex items-center space-x-3">
+                      {/* Project Thumbnail */}
+                      <div className="w-10 h-10 rounded-md overflow-hidden flex-shrink-0 border border-gray-600">
+                        <img 
+                          src={project.thumbnail_image} 
+                          alt={project.title}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
-                      <div>
-                        <div className="font-mono text-sm font-semibold">{project.title}</div>
-                        <div className="text-xs opacity-75">{project.technologies[0]}</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-mono text-sm font-semibold truncate">{project.title}</div>
+                        <div className="text-xs opacity-75 truncate">{project.technologies[0]}</div>
                       </div>
                     </div>
                   </button>
@@ -107,6 +114,15 @@ const Projects = ({ id, data }) => {
                         <ExternalLink className="w-5 h-5" />
                       </button>
                     </div>
+                    
+                    {/* Details Button */}
+                    <button 
+                      onClick={() => openProjectDetails(data[selectedProject].id)}
+                      className="flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 rounded-md transition-all duration-300 text-white font-semibold shadow-lg hover:shadow-cyan-500/25 transform hover:scale-105"
+                    >
+                      <Eye className="w-5 h-5" />
+                      <span className="font-mono">VIEW DETAILS</span>
+                    </button>
                   </div>
                 </div>
 
