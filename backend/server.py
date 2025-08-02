@@ -35,6 +35,56 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+# Project Models
+class ProjectMedia(BaseModel):
+    url: str
+    title: str
+    type: str  # "image" or "video"
+
+class Project(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    title: str
+    description: str  # Short description for projects list
+    long_description: dict  # {"summary": str, "modules": str, "tech_stack": str}
+    technologies: List[str]
+    features: List[str]
+    status: str
+    impact: str
+    thumbnail_image: str  # URL for main projects view
+    videos: List[ProjectMedia]  # Multiple videos, first one auto-plays
+    images: List[ProjectMedia]  # 4-5 images for gallery
+    github_url: str = ""
+    live_url: str = ""
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+
+class ProjectCreate(BaseModel):
+    title: str
+    description: str
+    long_description: dict
+    technologies: List[str]
+    features: List[str]
+    status: str
+    impact: str
+    thumbnail_image: str
+    videos: List[ProjectMedia]
+    images: List[ProjectMedia]
+    github_url: str = ""
+    live_url: str = ""
+
+class ProjectUpdate(BaseModel):
+    title: str = None
+    description: str = None
+    long_description: dict = None
+    technologies: List[str] = None
+    features: List[str] = None
+    status: str = None
+    impact: str = None
+    thumbnail_image: str = None
+    videos: List[ProjectMedia] = None
+    images: List[ProjectMedia] = None
+    github_url: str = None
+    live_url: str = None
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
