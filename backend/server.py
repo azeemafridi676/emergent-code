@@ -102,6 +102,61 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
+# Project Routes
+@api_router.get("/projects", response_model=List[Project])
+async def get_projects():
+    """Get all projects"""
+    projects = await db.projects.find().to_list(1000)
+    return [Project(**project) for project in projects]
+
+@api_router.get("/projects/{project_id}", response_model=Project)
+async def get_project(project_id: str):
+    """Get a specific project by ID"""
+    project = await db.projects.find_one({"id": project_id})
+    if not project:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=404, detail="Project not found")
+    return Project(**project)
+
+@api_router.post("/projects", response_model=Project)
+async def create_project(input: ProjectCreate):
+    """Create a new project"""
+    project_dict = input.dict()
+    project_obj = Project(**project_dict)
+    _ = await db.projects.insert_one(project_obj.dict())
+    return project_obj
+
+@api_router.put("/projects/{project_id}", response_model=Project)
+async def update_project(project_id: str, input: ProjectUpdate):
+    """Update a project"""
+    from fastapi import HTTPException
+    
+    # Find existing project
+    existing_project = await db.projects.find_one({"id": project_id})
+    if not existing_project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    
+    # Update only provided fields
+    update_data = {k: v for k, v in input.dict().items() if v is not None}
+    
+    if update_data:
+        await db.projects.update_one({"id": project_id}, {"$set": update_data})
+    
+    # Return updated project
+    updated_project = await db.projects.find_one({"id": project_id})
+    return Project(**updated_project)
+
+@api_router.delete("/projects/{project_id}")
+async def delete_project(project_id: str):
+    """Delete a project"""
+    from fastapi import HTTPException
+    
+    result = await db.projects.delete_one({"id": project_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Project not found")
+    
+    return {"message": "Project deleted successfully"}
+
 # Include the router in the main app
 app.include_router(api_router)
 
