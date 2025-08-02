@@ -194,14 +194,10 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus:
-    - "ProjectDetail Component with Video and Images"
-    - "Routing for Project Details"
-  stuck_tasks:
-    - "ProjectDetail Component with Video and Images"
-    - "Routing for Project Details"
+  current_focus: []
+  stuck_tasks: []
   test_all: false
-  test_priority: "stuck_first"
+  test_priority: "completed"
 
 agent_communication:
   - agent: "main"
