@@ -114,7 +114,6 @@ async def get_project(project_id: str):
     """Get a specific project by ID"""
     project = await db.projects.find_one({"id": project_id})
     if not project:
-        from fastapi import HTTPException
         raise HTTPException(status_code=404, detail="Project not found")
     return Project(**project)
 
@@ -129,8 +128,6 @@ async def create_project(input: ProjectCreate):
 @api_router.put("/projects/{project_id}", response_model=Project)
 async def update_project(project_id: str, input: ProjectUpdate):
     """Update a project"""
-    from fastapi import HTTPException
-    
     # Find existing project
     existing_project = await db.projects.find_one({"id": project_id})
     if not existing_project:
@@ -149,8 +146,6 @@ async def update_project(project_id: str, input: ProjectUpdate):
 @api_router.delete("/projects/{project_id}")
 async def delete_project(project_id: str):
     """Delete a project"""
-    from fastapi import HTTPException
-    
     result = await db.projects.delete_one({"id": project_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Project not found")
